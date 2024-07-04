@@ -8,10 +8,10 @@ import book7 from "./images/books/book7.jpg";
 import book8 from "./images/books/book8.jpg";
 import book9 from "./images/books/book9.jpg";
 
-const allBooks = [
+const newCollections = [
   {
     id: 1,
-    name: "Book 1",
+    name: "Collection 1",
     category: "Education",
     image: book1,
     newPrice: 50.0,
@@ -19,7 +19,7 @@ const allBooks = [
   },
   {
     id: 2,
-    name: "Book 2",
+    name: "Collection 2",
     category: "Education",
     image: book2,
     newPrice: 30.0,
@@ -27,15 +27,15 @@ const allBooks = [
   },
   {
     id: 3,
-    name: "Book 3",
-    category: "Education",
-    image: book3,
+    name: "Collection 3",
+    category: "book3",
+    image: Collection3,
     newPrice: 60.0,
     oldPrice: 90.5,
   },
   {
     id: 4,
-    name: "Book 4",
+    name: "Collection 4",
     category: "Comic",
     image: book4,
     newPrice: 20.0,
@@ -43,7 +43,7 @@ const allBooks = [
   },
   {
     id: 5,
-    name: "Book 5",
+    name: "Collection 5",
     category: "Comic",
     image: book5,
     newPrice: 70.0,
@@ -51,7 +51,7 @@ const allBooks = [
   },
   {
     id: 6,
-    name: "Book 6",
+    name: "Collection 6",
     category: "Comic",
     image: book6,
     newPrice: 40.0,
@@ -59,7 +59,7 @@ const allBooks = [
   },
   {
     id: 7,
-    name: "Book 7",
+    name: "Collection 7",
     category: "Technology",
     image: book7,
     newPrice: 70.0,
@@ -67,18 +67,12 @@ const allBooks = [
   },
   {
     id: 8,
-    name: "Book 8",
+    name: "Collection 8",
     category: "Technology",
     image: book8,
     newPrice: 80.0,
     oldPrice: 89.0,
   },
-  {
-    id: 9,
-    name: "Book 9",
-    category: "Technology",
-    image: book9,
-    newPrice: 90.0,
-    oldPrice: 99.0,
-  },
 ];
+
+export default newCollections;
