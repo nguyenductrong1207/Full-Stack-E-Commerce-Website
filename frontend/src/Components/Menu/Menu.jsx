@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Style.css";
 import logo from "../Assets/images/logo.png";
 import Container from "react-bootstrap/Container";
@@ -6,10 +6,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import { ShopContext } from "../../Context/ShopContext";
 
 const Menu = () => {
+  const {getTotalCartItems} = useContext(ShopContext);
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -43,7 +44,7 @@ const Menu = () => {
             <Nav.Link href="/cart">
               Cart
               {/* <Link to="/cart">Cart</Link> */}
-              <Badge bg="secondary">0</Badge>
+              <Badge bg="secondary">{getTotalCartItems()}</Badge>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

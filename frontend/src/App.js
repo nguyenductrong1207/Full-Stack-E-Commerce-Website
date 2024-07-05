@@ -15,8 +15,8 @@ import ShopContextProvider from "./Context/ShopContext";
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <ShopContextProvider>
+      <ShopContextProvider>
+        <BrowserRouter>
           <Menu />
           <Routes>
             <Route path="/" element={<Shop />} />
@@ -30,8 +30,8 @@ function App() {
             <Route path="/login" element={<LoginSignUp />} />
           </Routes>
           <Footer />
-        </ShopContextProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </ShopContextProvider>
     </div>
   );
 }
