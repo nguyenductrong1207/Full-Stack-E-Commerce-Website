@@ -5,20 +5,20 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Item from "../Item/Item";
 
-const Popular = () => {
-  const [popular, setPopular] = useState([]);
+const NewCollection = () => {
+  const [newCollection, setNewCollection] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/popularInEducation")
+    fetch("http://localhost:4000/newcollection")
       .then((res) => res.json())
-      .then((data) => setPopular(data));
+      .then((data) => setNewCollection(data));
   }, []);
 
   return (
     <Container>
-      <h2>Popular</h2>
+      <h2>New Collection</h2>
       <Row>
-        {popular.map((item, i) => {
+        {newCollection.map((item, i) => {
           return (
             <Col>
               <Item
@@ -37,4 +37,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default NewCollection;

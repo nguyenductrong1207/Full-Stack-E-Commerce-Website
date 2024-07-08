@@ -29,7 +29,7 @@ const newCollections = [
     id: 3,
     name: "Collection 3",
     category: "book3",
-    image: Collection3,
+    image: book3,
     newPrice: 60.0,
     oldPrice: 90.5,
   },

@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MyPagination from "../Components/Pagination/MyPagination";
+import Popular from "../Components/Popular/Popular";
 
 const ShopCategories = (props) => {
   const { allBooks } = useContext(ShopContext);
@@ -35,6 +36,7 @@ const ShopCategories = (props) => {
         })}
       </Row>
       <MyPagination/>
+      <Popular/>
     </Container>
   );
 };

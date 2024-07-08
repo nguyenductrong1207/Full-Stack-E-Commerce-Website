@@ -7,7 +7,7 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const { type } = require("os");
-const { log } = require("console");
+const { log, error } = require("console");
 
 app.use(express.json());
 app.use(cors());
@@ -130,7 +130,127 @@ app.get('/getAllBooks', async (req, res) => {
     res.send(books);
 });
 
-// Creating API For Update Book
+// Shema Creating For User Modal
+const Users = mongoose.model('Users', {
+    name: {
+        type: String,
+    },
+
+    email: {
+        type: String,
+        unique: true,
+    },
+
+    password: {
+        type: String,
+    },
+
+    cartData: {
+        type: Object,
+    },
+
+    date: {
+        type: Date,
+        default: Date.now,
+    }
+});
+
+// Creating Endpoint For Registering The User
+app.post('/signup', async (req, res) => {
+    let check = await Users.findOne({ email: req.body.email });
+
+    if (check) {
+        return res.status(400).json({ success: false, errors: "Existing User Found With Same Email Address" })
+    }
+
+    let cart = {};
+    for (let i = 0; i < 300; i++) {
+        cart[i] = 0;
+    }
+
+    const user = new Users({
+        name: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        cartData: cart,
+    });
+
+    await user.save();
+
+    const data = {
+        user: {
+            id: user.id
+        }
+    }
+
+    const token = jwt.sign(data, 'secret_ecom');
+    res.json({ success: true, token });
+})
+
+// Creaign Endpoint For User Login
+app.post('/login', async (req, res) => {
+    let user = await Users.findOne({ email: req.body.email });
+
+    if (user) {
+        const passwordCheck = req.body.password === user.password;
+
+        if (passwordCheck) {
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+            const token = jwt.sign(data, 'secret_ecom');
+            res.json({ success: true, token });
+        }
+        else {
+            res.json({ success: false, error: "Wrong Password" });
+        }
+    }
+    else {
+        res.json({ success: false, error: "Wrong Email" });
+    }
+})
+
+// Creating Endpoint For New Collection Data
+app.get('/newcollection', async (req, res) => {
+    let books = await Book.find({});
+    let newcollection = books.slice(1).slice(-8);
+
+    console.log("New Collection Fetched");
+    res.send(newcollection);
+})
+
+// Creating Endpoint For Popular In Education Section
+app.get('/popularInEducation', async (req, res) => {
+    let books = await Book.find({ category: "Education" });
+    let popularInEducation = books.slice(0, 4);
+
+    console.log("Popular In Education Fetched");
+    res.send(popularInEducation);
+})
+
+// Creating Middelware To Fetch User
+const fetchUser = async (req, res, next) => {
+    const token = req.header('auth-token');
+    if (!token) {
+        res.status(401).send({ errors: "Please Authenticate Using Valid Token" });
+    }
+    else {
+        try {
+            const data = jwt.verify(token, 'secret_ecom');
+            req.user = data.user;
+            next();
+        } catch (error) {
+            res.status(401).send({ errors: "Please Authenticate Using A Valid Token" });
+        }
+    }
+}
+
+// Creating Endpoint For Adding Books In Cart Data
+app.post('/addToCart', fetchUser, async (req, res) => {
+    console.log(req.body, req.user);
+})
 
 // Running
 app.listen(port, (error) => {
@@ -139,4 +259,4 @@ app.listen(port, (error) => {
     } else {
         console.log("Error: " + error);
     }
-});
+}); 

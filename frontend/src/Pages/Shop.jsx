@@ -1,13 +1,14 @@
 import React from 'react'
 import Slider from '../Components/Slider/Slider'
-import Popular from '../Components/Popular/Popular'
 import Offer from '../Components/Offer/Offer'
+import NewCollection from '../Components/NewCollection/NewCollection'
+import Popular from '../Components/Popular/Popular'
 
 const Shop = () => {
   return (
     <div>
       <Slider/>
-      <Popular/>
+      <NewCollection/>
       <Offer/>
     </div>
   )

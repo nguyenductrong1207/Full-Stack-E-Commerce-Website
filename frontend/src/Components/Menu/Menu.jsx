@@ -7,9 +7,10 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { ShopContext } from "../../Context/ShopContext";
+import Button from "react-bootstrap/Button";
 
 const Menu = () => {
-  const {getTotalCartItems} = useContext(ShopContext);
+  const { getTotalCartItems } = useContext(ShopContext);
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -40,7 +41,21 @@ const Menu = () => {
             </NavDropdown>
             {/* <Link to="/login"> */}
             {/* </Link> */}
-            <Nav.Link href="/login">Login</Nav.Link>
+
+            {localStorage.getItem("auth-token") ? (
+              <Button
+                variant="primary"
+                onClick={() => {
+                  localStorage.removeItem("auth-token");
+                  window.location.replace("/");
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Nav.Link href="/login">Login</Nav.Link>
+            )}
+
             <Nav.Link href="/cart">
               Cart
               {/* <Link to="/cart">Cart</Link> */}
