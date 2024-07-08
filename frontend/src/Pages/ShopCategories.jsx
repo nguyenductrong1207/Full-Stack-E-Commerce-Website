@@ -17,12 +17,11 @@ const ShopCategories = (props) => {
       <h2>Banner Without CSS</h2>
       <img src={props.banner} alt="banner" />
       <Row>
-        {allBooks.map((book, i) => {
+        {allBooks.map((book) => {
           if (props.category === book.category) {
             return (
-              <Col>
+              <Col key={book.id}>
                 <Item
-                  key={i}
                   id={book.id}
                   name={book.name}
                   image={book.image}

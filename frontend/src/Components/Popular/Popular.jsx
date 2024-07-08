@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Style.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Item from "../Item/Item";
+import Button from "react-bootstrap/Button";
+import { ShopContext } from "../../Context/ShopContext";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
+  const { addToCart } = useContext(ShopContext);
 
   useEffect(() => {
     fetch("http://localhost:4000/popularInEducation")
@@ -18,17 +21,24 @@ const Popular = () => {
     <Container>
       <h2>Popular</h2>
       <Row>
-        {popular.map((item, i) => {
+        {popular.map((book) => {
           return (
-            <Col>
+            <Col key={book.id}>
               <Item
-                key={i}
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                newPrice={item.newPrice}
-                oldPrice={item.oldPrice}
+                id={book.id}
+                name={book.name}
+                image={book.image}
+                newPrice={book.newPrice}
+                oldPrice={book.oldPrice}
               />
+              <Button
+                variant="primary"
+                onClick={() => {
+                  addToCart(book.id);
+                }}
+              >
+                Add To Cart
+              </Button>{" "}
             </Col>
           );
         })}

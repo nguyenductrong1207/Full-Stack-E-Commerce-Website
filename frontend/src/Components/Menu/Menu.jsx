@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Style.css";
 import logo from "../Assets/images/logo.png";
 import Container from "react-bootstrap/Container";
@@ -21,26 +21,12 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">
-              Home
-              {/* <Link to="/">Home</Link> */}
-            </Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="Category" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/education">
-                Education
-                {/* <Link to="/education">Education</Link> */}
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/comic">
-                Comic
-                {/* <Link to="/comic">Comic</Link> */}
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/technology">
-                Technology
-                {/* <Link to="/technology">Technology</Link> */}
-              </NavDropdown.Item>
+              <NavDropdown.Item href="/education">Education</NavDropdown.Item>
+              <NavDropdown.Item href="/comic">Comic</NavDropdown.Item>
+              <NavDropdown.Item href="/technology">Technology</NavDropdown.Item>
             </NavDropdown>
-            {/* <Link to="/login"> */}
-            {/* </Link> */}
 
             {localStorage.getItem("auth-token") ? (
               <Button
@@ -58,7 +44,6 @@ const Menu = () => {
 
             <Nav.Link href="/cart">
               Cart
-              {/* <Link to="/cart">Cart</Link> */}
               <Badge bg="secondary">{getTotalCartItems()}</Badge>
             </Nav.Link>
           </Nav>

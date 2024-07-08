@@ -11,16 +11,15 @@ const RelatedBook = () => {
     <Container>
       <h2>Related Book</h2>
       <Row>
-        {dataBooks.map((item, i) => {
+        {dataBooks.map((book, i) => {
           return (
-            <Col>
+            <Col key={book.id}>
               <Item
-                key={i}
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                newPrice={item.newPrice}
-                oldPrice={item.oldPrice}
+                id={book.id}
+                name={book.name}
+                image={book.image}
+                newPrice={book.newPrice}
+                oldPrice={book.oldPrice}
               />
             </Col>
           );

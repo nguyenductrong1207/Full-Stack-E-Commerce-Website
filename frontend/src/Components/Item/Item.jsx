@@ -6,7 +6,10 @@ const Item = (props) => {
   return (
     <Card border="primary" style={{ width: "18rem" }}>
       <Card.Link href={`/book/${props.id}`}>
-        <Card.Img onClick={window.scrollTo(0,0)} variant="top" src={props.image} />
+        <Card.Img
+          variant="top"
+          src={props.image}
+        />
       </Card.Link>
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>

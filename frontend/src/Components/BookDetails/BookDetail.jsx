@@ -11,6 +11,10 @@ const BookDetail = (props) => {
   const { book } = props;
   const { addToCart } = useContext(ShopContext);
 
+  if (!book) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Container>
       <Row>

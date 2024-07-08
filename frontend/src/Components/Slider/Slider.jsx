@@ -9,7 +9,7 @@ const Slider = () => {
         <img
           className="d-block w-100"
           src="https://media.geeksforgeeks.org/wp-content/uploads/20210425122739/2-300x115.png"
-          alt="Image One"
+          alt="GeeksforGeeks Logo 1"
         />
         <Carousel.Caption>
           <h3>First slide label</h3>
@@ -20,7 +20,7 @@ const Slider = () => {
         <img
           className="d-block w-100"
           src="https://media.geeksforgeeks.org/wp-content/uploads/20210425122716/1-300x115.png"
-          alt="Image Two"
+          alt="GeeksforGeeks Logo 2"
         />
         <Carousel.Caption>
           <h3>Second slide label</h3>
@@ -28,7 +28,11 @@ const Slider = () => {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={1000}>
-        {/* <ExampleCarouselImage text="Third slide" /> */}
+        <img
+          className="d-block w-100"
+          src="https://via.placeholder.com/300x115.png"
+          alt="Placeholder for Third Slide"
+        />
         <Carousel.Caption>
           <h3>Third slide label</h3>
           <p>
