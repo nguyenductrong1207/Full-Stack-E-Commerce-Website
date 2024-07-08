@@ -18,6 +18,20 @@ const ShopContextProvider = (props) => {
     fetch("http://localhost:4000/getAllBooks")
       .then((res) => res.json())
       .then((data) => setAllBooks(data));
+
+    if (localStorage.getItem("auth-token")) {
+      fetch("http://localhost:4000/getCart", {
+        method: "POST",
+        headers: {
+          Accept: "application/form-data",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+          "Content-Type": "application/json",
+        },
+        body: "",
+      })
+        .then((res) => res.json())
+        .then((data) => setCartItems(data));
+    }
   }, []);
 
   const addToCart = (itemId) => {
@@ -42,6 +56,19 @@ const ShopContextProvider = (props) => {
       ...prev,
       [itemId]: Math.max((prev[itemId] || 1) - 1, 0),
     }));
+    if (localStorage.getItem("auth-token")) {
+      fetch("http://localhost:4000/deleteFromCart", {
+        method: "POST",
+        headers: {
+          Accept: "application/form-data",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemId: itemId }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
   };
 
   const getTotalCartAmount = () => {

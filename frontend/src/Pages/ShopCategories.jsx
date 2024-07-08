@@ -7,27 +7,36 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MyPagination from "../Components/Pagination/MyPagination";
 import Popular from "../Components/Popular/Popular";
+import Button from "react-bootstrap/Button";
 
 const ShopCategories = (props) => {
-  const { allBooks } = useContext(ShopContext);
+  const { allBooks, addToCart } = useContext(ShopContext);
 
   return (
     <Container>
       <h2>Banner Without CSS</h2>
       <img src={props.banner} alt="banner" />
       <Row>
-        {allBooks.map((item, i) => {
-          if (props.category === item.category) {
+        {allBooks.map((book, i) => {
+          if (props.category === book.category) {
             return (
               <Col>
                 <Item
                   key={i}
-                  id={item.id}
-                  name={item.name}
-                  image={item.image}
-                  newPrice={item.newPrice}
-                  oldPrice={item.oldPrice}
+                  id={book.id}
+                  name={book.name}
+                  image={book.image}
+                  newPrice={book.newPrice}
+                  oldPrice={book.oldPrice}
                 />
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    addToCart(book.id);
+                  }}
+                >
+                  Add To Cart
+                </Button>{" "}
               </Col>
             );
           } else {
@@ -35,8 +44,8 @@ const ShopCategories = (props) => {
           }
         })}
       </Row>
-      <MyPagination/>
-      <Popular/>
+      <MyPagination />
+      <Popular />
     </Container>
   );
 };
