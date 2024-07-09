@@ -15,7 +15,7 @@ const Menu = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img src={logo} alt="logo" className="d-inline-block align-top" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -29,15 +29,19 @@ const Menu = () => {
             </NavDropdown>
 
             {localStorage.getItem("auth-token") ? (
-              <Button
-                variant="primary"
-                onClick={() => {
-                  localStorage.removeItem("auth-token");
-                  window.location.replace("/");
-                }}
-              >
-                Logout
-              </Button>
+              <div>
+                {" "}
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    localStorage.removeItem("auth-token");
+                    window.location.replace("/");
+                  }}
+                >
+                  Logout
+                </Button>
+                <Button variant="primary">Profile</Button>
+              </div>
             ) : (
               <Nav.Link href="/login">Login</Nav.Link>
             )}

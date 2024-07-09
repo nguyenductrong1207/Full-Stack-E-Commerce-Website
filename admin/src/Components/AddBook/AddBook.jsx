@@ -8,6 +8,11 @@ import Image from "react-bootstrap/Image";
 import { useState } from "react";
 
 const AddBook = () => {
+  const url = "http://localhost:4000";
+
+  // backend server url
+  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+
   const [image, setImage] = useState(false);
   const [bookDetail, setBookDetail] = useState({
     name: "",
@@ -33,7 +38,7 @@ const AddBook = () => {
     let formData = new FormData();
     formData.append("book", image);
 
-    await fetch("http://localhost:4000/upload", {
+    await fetch(url + "/upload", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -48,7 +53,7 @@ const AddBook = () => {
     if (responseData.success) {
       book.image = responseData.imageURL;
       console.log(book);
-      await fetch("http://localhost:4000/addBook", {
+      await fetch(url + "/addBook", {
         method: "POST",
         headers: {
           Accept: "application/json",

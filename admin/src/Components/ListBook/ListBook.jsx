@@ -7,10 +7,15 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 
 const ListBook = () => {
+  const url = "http://localhost:4000";
+
+  // backend server url
+  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+
   const [allBooks, setAllBooks] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("http://localhost:4000/getAllBooks")
+    await fetch(url + "/getAllBooks")
       .then((res) => res.json())
       .then((data) => {
         setAllBooks(data);
@@ -22,7 +27,7 @@ const ListBook = () => {
   }, []);
 
   const deleteBook = async (id) => {
-    await fetch("http://localhost:4000/deleteBook", {
+    await fetch(url + "/deleteBook", {
       method: "POST",
       headers: {
         Accept: "application/json",

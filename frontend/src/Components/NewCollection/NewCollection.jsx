@@ -8,11 +8,16 @@ import Button from "react-bootstrap/Button";
 import { ShopContext } from "../../Context/ShopContext";
 
 const NewCollection = () => {
+  const url = "http://localhost:4000";
+
+  // backend server url
+  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+
   const [newCollection, setNewCollection] = useState([]);
   const { addToCart } = useContext(ShopContext);
 
   useEffect(() => {
-    fetch("http://localhost:4000/newcollection")
+    fetch(url + "/newcollection")
       .then((res) => res.json())
       .then((data) => setNewCollection(data));
   }, []);

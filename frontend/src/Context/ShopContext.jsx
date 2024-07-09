@@ -11,16 +11,21 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
+  const url = "http://localhost:4000";
+
+  // backend server url
+  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+
   const [allBooks, setAllBooks] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
   useEffect(() => {
-    fetch("http://localhost:4000/getAllBooks")
+    fetch(url + "/getAllBooks")
       .then((res) => res.json())
       .then((data) => setAllBooks(data));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/getCart", {
+      fetch(url + "/getCart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -37,7 +42,7 @@ const ShopContextProvider = (props) => {
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/addToCart", {
+      fetch(url + "/addToCart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -57,7 +62,7 @@ const ShopContextProvider = (props) => {
       [itemId]: Math.max((prev[itemId] || 1) - 1, 0),
     }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/deleteFromCart", {
+      fetch(url + "/deleteFromCart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",

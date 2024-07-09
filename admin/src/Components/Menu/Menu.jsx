@@ -1,5 +1,4 @@
 import React from "react";
-import "./Style.css";
 import logo from "../../assets/images/logo.png";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
