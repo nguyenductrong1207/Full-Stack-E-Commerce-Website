@@ -8,10 +8,10 @@ import Image from "react-bootstrap/Image";
 import { useState } from "react";
 
 const AddBook = () => {
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
 
   // backend server url
-  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
 
   const [image, setImage] = useState(false);
   const [bookDetail, setBookDetail] = useState({

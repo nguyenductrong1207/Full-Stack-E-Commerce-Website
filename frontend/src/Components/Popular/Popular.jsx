@@ -8,10 +8,10 @@ import Button from "react-bootstrap/Button";
 import { ShopContext } from "../../Context/ShopContext";
 
 const Popular = () => {
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
 
   // backend server url
-  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
 
   const [popular, setPopular] = useState([]);
   const { addToCart } = useContext(ShopContext);

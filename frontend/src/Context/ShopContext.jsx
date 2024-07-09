@@ -11,10 +11,10 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
 
   // backend server url
-  // const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
 
   const [allBooks, setAllBooks] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
