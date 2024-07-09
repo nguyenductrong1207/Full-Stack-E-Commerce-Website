@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./Style.css";
 import logo from "../Assets/images/logo.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
