@@ -23,11 +23,11 @@ const NewCollection = () => {
 
   return (
     <Container>
-      <h2>New Collection</h2>
+      <h2 className="mt-5 mb-4">New Collection</h2>
       <Row>
         {newCollection.map((book) => {
           return (
-            <Col key={book.id}>
+            <Col md="3" key={book.id} className="mb-5">
               <Item
                 id={book.id}
                 name={book.name}

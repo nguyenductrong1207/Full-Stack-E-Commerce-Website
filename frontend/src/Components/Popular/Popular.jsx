@@ -23,11 +23,11 @@ const Popular = () => {
 
   return (
     <Container>
-      <h2>Popular</h2>
+      <h2 className="mt-5 mb-4">Popular</h2>
       <Row>
         {popular.map((book) => {
           return (
-            <Col key={book.id}>
+            <Col md="3" key={book.id} className="mb-5">
               <Item
                 id={book.id}
                 name={book.name}
@@ -40,6 +40,7 @@ const Popular = () => {
                 onClick={() => {
                   addToCart(book.id);
                 }}
+                className="mt-3"
               >
                 Add To Cart
               </Button>{" "}

@@ -236,6 +236,15 @@ app.get('/popularInEducation', async (req, res) => {
     res.send(popularInEducation);
 })
 
+// Creating EndPoint For Related Book Section
+app.get('/relatedBook', async (req, res) => {
+    let books = await Book.find({ category: "Education" });
+    let relatedBook = books.slice(0, 4);
+
+    console.log("Related Book Fetched");
+    res.send(relatedBook);
+})
+
 // Creating Middelware To Fetch User
 const fetchUser = async (req, res, next) => {
     const token = req.header('auth-token');
