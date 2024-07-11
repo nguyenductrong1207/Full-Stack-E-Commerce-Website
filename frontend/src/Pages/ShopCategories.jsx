@@ -20,22 +20,31 @@ const ShopCategories = (props) => {
         {allBooks.map((book) => {
           if (props.category === book.category) {
             return (
-              <Col key={book.id}>
+              <Col md="3" key={book.id} className="mb-5 mt-5">
                 <Item
                   id={book.id}
                   name={book.name}
+                  description={book.description}
+                  price={book.price}
+                  salePrice={book.salePrice}
+                  quantity={book.quantity}
+                  language={book.language}
+                  publicationDate={book.publicationDate}
+                  numPages={book.numPages}
                   image={book.image}
-                  newPrice={book.newPrice}
-                  oldPrice={book.oldPrice}
+                  author={book.author}
+                  category={book.category}
+                  publisher={book.publisher}
                 />
                 <Button
                   variant="primary"
                   onClick={() => {
                     addToCart(book.id);
                   }}
+                  className="mt-3"
                 >
                   Add To Cart
-                </Button>{" "}
+                </Button>
               </Col>
             );
           } else {

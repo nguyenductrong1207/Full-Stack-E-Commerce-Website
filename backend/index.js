@@ -10,10 +10,10 @@ const { type } = require("os");
 const { log, error } = require("console");
 
 // BaseURL
-// const url = `http://localhost:${port}`;
+const url = `http://localhost:${port}`;
 
 // BaseURL Backend Server
-const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+// const url = "https://backend-e-commerce-website-using-mern.onrender.com";
 
 app.use(express.json());
 app.use(cors());
@@ -52,37 +52,58 @@ const Book = mongoose.model("Book", {
         type: Number,
         require: true,
     },
-
     name: {
         type: String,
         require: true,
     },
-
+    description: {
+        type: String,
+        require: true,
+    },
+    price: {
+        type: Number,
+        require: true,
+    },
+    salePrice: {
+        type: Number,
+        require: true,
+    },
+    quantity: {
+        type: Number,
+        require: true,
+    },
+    language: {
+        type: String,
+        require: true,
+    },
+    publicationDate: {
+        type: String,
+        require: true,
+    },
+    numPages: {
+        type: Number,
+        require: true,
+    },
     image: {
         type: String,
         require: true,
     },
-
+    author: {
+        type: String,
+        require: true,
+    },
     category: {
         type: String,
         require: true,
     },
-
-    newPrice: {
-        type: Number,
+    publisher: {
+        type: String,
         require: true,
     },
-
-    oldPrice: {
-        type: Number,
-        require: true,
-    },
-
     date: {
         type: Date,
         default: Date.now,
     },
-
     avilable: {
         type: Boolean,
         default: true,
@@ -104,10 +125,17 @@ app.post('/addBook', async (req, res) => {
     const book = new Book({
         id: id,
         name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        salePrice: req.body.salePrice,
+        quantity: req.body.quantity,
+        language: req.body.language,
+        publicationDate: req.body.publicationDate,
+        numPages: req.body.numPages,
         image: req.body.image,
+        author: req.body.author,
         category: req.body.category,
-        newPrice: req.body.newPrice,
-        oldPrice: req.body.oldPrice,
+        publisher: req.body.publisher,
     });
 
     console.log(book);
@@ -141,20 +169,16 @@ const Users = mongoose.model('Users', {
     name: {
         type: String,
     },
-
     email: {
         type: String,
         unique: true,
     },
-
     password: {
         type: String,
     },
-
     cartData: {
         type: Object,
     },
-
     date: {
         type: Date,
         default: Date.now,

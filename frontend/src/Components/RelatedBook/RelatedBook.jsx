@@ -6,14 +6,11 @@ import Col from "react-bootstrap/Col";
 import Item from "../Item/Item";
 import Button from "react-bootstrap/Button";
 import config from "../../config";
-import { ShopContext } from "../../Context/ShopContext";
 
 const RelatedBook = () => {
   // BaseURL
   const url = config.url;
-
   const [related, setRelated] = useState([]);
-  const { addToCart } = useContext(ShopContext);
 
   useEffect(() => {
     fetch(url + "/relatedBook")
@@ -23,31 +20,30 @@ const RelatedBook = () => {
 
   return (
     <Container>
-      <h2 className="mt-5 mb-4">Related Book</h2>
-      <Row>
-        {related.map((book) => {
-          return (
-            <Col md="3" key={book.id} className="mb-5">
+      <h2 className="mb-4">Related Book</h2>
+      {related.map((book) => {
+        return (
+          <Row>
+            <Col md="" key={book.id} className="mb-5">
               <Item
                 id={book.id}
                 name={book.name}
+                description={book.description}
+                price={book.price}
+                salePrice={book.salePrice}
+                quantity={book.quantity}
+                language={book.language}
+                publicationDate={book.publicationDate}
+                numPages={book.numPages}
                 image={book.image}
-                newPrice={book.newPrice}
-                oldPrice={book.oldPrice}
+                author={book.author}
+                category={book.category}
+                publisher={book.publisher}
               />
-              <Button
-                variant="primary"
-                onClick={() => {
-                  addToCart(book.id);
-                }}
-                className="mt-3"
-              >
-                Add To Cart
-              </Button>
             </Col>
-          );
-        })}
-      </Row>
+          </Row>
+        );
+      })}
     </Container>
   );
 };

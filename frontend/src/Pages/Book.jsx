@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import { useParams } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Breadcrum from "../Components/Breadcrumb/Breadcrum";
 import BookDetail from "../Components/BookDetails/BookDetail";
 import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
@@ -22,10 +25,18 @@ const Book = () => {
 
   return (
     <div>
-      <Breadcrum book={book} />
-      <BookDetail book={book} />
-      <DescriptionBox />
-      <RelatedBook />
+      <Container>
+        <Breadcrum book={book} />
+        <BookDetail book={book} />
+        <Row>
+          <Col md="7">
+            <DescriptionBox book={book} />
+          </Col>
+          <Col md="5">
+            <RelatedBook />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

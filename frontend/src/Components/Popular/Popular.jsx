@@ -31,9 +31,17 @@ const Popular = () => {
               <Item
                 id={book.id}
                 name={book.name}
+                description={book.description}
+                price={book.price}
+                salePrice={book.salePrice}
+                quantity={book.quantity}
+                language={book.language}
+                publicationDate={book.publicationDate}
+                numPages={book.numPages}
                 image={book.image}
-                newPrice={book.newPrice}
-                oldPrice={book.oldPrice}
+                author={book.author}
+                category={book.category}
+                publisher={book.publisher}
               />
               <Button
                 variant="primary"

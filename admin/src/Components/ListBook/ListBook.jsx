@@ -40,11 +40,12 @@ const ListBook = () => {
       <thead>
         <tr>
           <th>#</th>
+          <th>Name</th>
           <th>Image</th>
-          <th>Title</th>
           <th>Category</th>
-          <th>New Price</th>
-          <th>Old Price</th>
+          <th>Author</th>
+          <th>Price</th>
+          <th>Quantity</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -53,13 +54,14 @@ const ListBook = () => {
           return (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td>
-                <Image src={book.image} thumbnail />
-              </td>
               <td>{book.name}</td>
-              <td>$ {book.oldPrice}</td>
-              <td>$ {book.newPrice}</td>
+              <td>
+                <Image src={book.image} className="img"/>
+              </td>
               <td>{book.category}</td>
+              <td>{book.author}</td>
+              <td>$ {book.salePrice}</td>
+              <td>{book.quantity}</td>
               <td>
                 <Button variant="danger" onClick={() => deleteBook(book.id)}>
                   X
