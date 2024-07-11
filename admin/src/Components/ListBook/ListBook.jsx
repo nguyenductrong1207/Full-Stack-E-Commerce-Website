@@ -5,13 +5,10 @@ import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
+import config from "../../config";
 
 const ListBook = () => {
-  // const url = "http://localhost:4000";
-
-  // backend server url
-  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
-
+  const url = config.url;
   const [allBooks, setAllBooks] = useState([]);
 
   const fetchInfo = async () => {

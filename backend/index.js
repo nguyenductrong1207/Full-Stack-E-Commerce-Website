@@ -9,6 +9,12 @@ const cors = require("cors");
 const { type } = require("os");
 const { log, error } = require("console");
 
+// BaseURL
+// const url = `http://localhost:${port}`;
+
+// BaseURL Backend Server
+const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+
 app.use(express.json());
 app.use(cors());
 
@@ -36,7 +42,7 @@ app.use('/images', express.static('upload/images'));
 app.post("/upload", upload.single('book'), (req, res) => {
     res.json({
         success: 1,
-        imageURL: `http://localhost:${port}/images/${req.file.filename}`
+        imageURL: `${url}/images/${req.file.filename}`
     });
 });
 
@@ -251,7 +257,7 @@ const fetchUser = async (req, res, next) => {
 app.post('/addToCart', fetchUser, async (req, res) => {
     console.log("Added", req.body.itemId);
     let userData = await Users.findOne({ _id: req.user.id });
-    
+
     userData.cartData[req.body.itemId] += 1;
     await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
     res.send("Added");

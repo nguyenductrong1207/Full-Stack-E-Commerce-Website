@@ -6,13 +6,10 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import { useState } from "react";
+import config from "../../config";
 
 const AddBook = () => {
-  // const url = "http://localhost:4000";
-
-  // backend server url
-  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
-
+  const url = config.url;
   const [image, setImage] = useState(false);
   const [bookDetail, setBookDetail] = useState({
     name: "",

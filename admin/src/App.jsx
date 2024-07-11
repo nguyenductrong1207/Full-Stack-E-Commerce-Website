@@ -1,12 +1,12 @@
 import React from "react";
 import Menu from "./Components/Menu/Menu";
-import Admin from "./Pages/Admin/Admin"
+import Admin from "./Pages/Admin/Admin";
 
 const App = () => {
   return (
     <div>
       <Menu />
-      <Admin/>
+      <Admin />
     </div>
   );
 };

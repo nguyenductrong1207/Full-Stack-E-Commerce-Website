@@ -6,12 +6,11 @@ import Col from "react-bootstrap/Col";
 import Item from "../Item/Item";
 import Button from "react-bootstrap/Button";
 import { ShopContext } from "../../Context/ShopContext";
+import config from "../../config";
 
 const Popular = () => {
-  // const url = "http://localhost:4000";
-
-  // backend server url
-  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+  // BaseURL
+  const url = config.url;
 
   const [popular, setPopular] = useState([]);
   const { addToCart } = useContext(ShopContext);

@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import config from "../config";
 
 export const ShopContext = createContext(null);
 
@@ -11,10 +12,8 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
-  // const url = "http://localhost:4000";
-
-  // backend server url
-  const url = "https://backend-e-commerce-website-using-mern.onrender.com";
+  // BaseURL
+  const url = config.url;
 
   const [allBooks, setAllBooks] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
