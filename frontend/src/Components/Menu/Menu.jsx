@@ -7,6 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { ShopContext } from "../../Context/ShopContext";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 const Menu = () => {
   const { getTotalCartItems } = useContext(ShopContext);
@@ -15,7 +16,7 @@ const Menu = () => {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">
-          <img src={logo} alt="logo" className="d-inline-block align-top" />
+          <Image src={logo} className="d-inline-block align-top" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

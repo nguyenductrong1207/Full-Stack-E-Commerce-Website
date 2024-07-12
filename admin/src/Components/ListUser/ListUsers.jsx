@@ -24,27 +24,29 @@ const ListUsers = () => {
   }, []);
 
   return (
-    <Table bordered hover className="bgColor">
-      <thead>
-        <h3>List User</h3>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {allUsers.map((user, i) => {
-          return (
-            <tr key={i}>
-              <td>{i + 1}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+    <div className="bgColor px-3 py-3">
+      <Table bordered hover className="">
+        <thead>
+          <h3 className="mb-3">List User</h3>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allUsers.map((user, i) => {
+            return (
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

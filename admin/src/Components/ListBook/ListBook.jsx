@@ -36,43 +36,45 @@ const ListBook = () => {
   };
 
   return (
-    <Table bordered hover className="bgColor">
-      <thead>
-        <h3>List Book</h3>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Image</th>
-          <th>Category</th>
-          <th>Author</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {allBooks.map((book, i) => {
-          return (
-            <tr key={i}>
-              <td>{i + 1}</td>
-              <td>{book.name}</td>
-              <td>
-                <Image src={book.image} className="img" />
-              </td>
-              <td>{book.category}</td>
-              <td>{book.author}</td>
-              <td>$ {book.salePrice}</td>
-              <td>{book.quantity}</td>
-              <td>
-                <Button variant="danger" onClick={() => deleteBook(book.id)}>
-                  X
-                </Button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+    <div className="bgColor px-3 py-3">
+      <Table bordered hover>
+        <thead>
+          <h3 className="mb-3">List Book</h3>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allBooks.map((book, i) => {
+            return (
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td>{book.name}</td>
+                <td>
+                  <Image src={book.image} className="img" />
+                </td>
+                <td>{book.category}</td>
+                <td>{book.author}</td>
+                <td>$ {book.salePrice}</td>
+                <td>{book.quantity}</td>
+                <td>
+                  <Button variant="danger" onClick={() => deleteBook(book.id)}>
+                    X
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 
