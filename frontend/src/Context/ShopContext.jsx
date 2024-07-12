@@ -56,10 +56,8 @@ const ShopContextProvider = (props) => {
   };
 
   const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({
-      ...prev,
-      [itemId]: Math.max((prev[itemId] || 1) - 1, 0),
-    }));
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+
     if (localStorage.getItem("auth-token")) {
       fetch(url + "/deleteFromCart", {
         method: "POST",
@@ -77,12 +75,19 @@ const ShopContextProvider = (props) => {
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = allBooks.find((book) => book.id === Number(item));
-        totalAmount += itemInfo.salePrice * cartItems[item];
+
+    allBooks.map((book) => {
+      if (cartItems[book.id] > 0) {
+        totalAmount += book.salePrice * cartItems[book.id];
       }
-    }
+    });
+
+    // for (const item in cartItems) {
+    //   if (cartItems[item] > 0) {
+    // let bookInfo = allBooks.find((book) => book.id === Number(item));
+    // totalAmount += bookInfo.salePrice * cartItems[item];
+    //   }
+    // }
 
     return totalAmount;
   };

@@ -43,15 +43,6 @@ const Popular = () => {
                 category={book.category}
                 publisher={book.publisher}
               />
-              <Button
-                variant="primary"
-                onClick={() => {
-                  addToCart(book.id);
-                }}
-                className="mt-3"
-              >
-                Add To Cart
-              </Button>{" "}
             </Col>
           );
         })}

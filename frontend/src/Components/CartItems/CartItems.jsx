@@ -12,6 +12,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 const CartItems = () => {
   const { getTotalCartAmount, allBooks, cartItems, removeFromCart } =
     useContext(ShopContext);
+  let i = 0;
   console.log("All Books:", allBooks);
   console.log("Cart Items:", cartItems);
   return (
@@ -30,20 +31,20 @@ const CartItems = () => {
           </tr>
         </thead>
         <tbody>
-          {allBooks.map((book, i) => {
+          {allBooks.map((book) => {
             if (cartItems[book.id] > 0) {
               return (
                 <tr key={book.id}>
-                  <td>{i + 1}</td>
+                  <td>{++i}</td>
                   <td>
-                    <Image src={book.image} thumbnail />
+                    <Image src={book.image} className="mb-3 img" />
                   </td>
                   <td>{book.name}</td>
-                  <td>$ {book.newPrice}</td>
+                  <td>$ {book.salePrice}</td>
                   <td>
                     <Button>{cartItems[book.id]}</Button>
                   </td>
-                  <td>$ {book.newPrice * cartItems[book.id]}</td>
+                  <td>$ {book.salePrice * cartItems[book.id]}</td>
                   <td>
                     <Button
                       variant="danger"
@@ -59,7 +60,7 @@ const CartItems = () => {
           })}
         </tbody>
       </Table>
-      <Row>
+      <Row className="mb-4 mt-4">
         <Col md={6}>
           <h2>Cart Total</h2>
 
@@ -71,9 +72,9 @@ const CartItems = () => {
               <Button variant="primary">Check Out</Button>
             </Col>
             <Col md={6}>
-              <p>${getTotalCartAmount()}</p>
+              <p>$ {getTotalCartAmount()}</p>
               <p>Free</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>$ {getTotalCartAmount()}</p>
             </Col>
           </Row>
         </Col>
