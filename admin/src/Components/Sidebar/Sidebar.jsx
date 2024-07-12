@@ -8,6 +8,7 @@ const Sidebar = () => {
       <Nav className="flex-column">
         <Nav.Link href="/addBook">Add Book</Nav.Link>
         <Nav.Link href="/listBook">Book List</Nav.Link>
+        <Nav.Link href="/listUser">User List</Nav.Link>
       </Nav>
     </div>
   );

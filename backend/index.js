@@ -46,6 +46,8 @@ app.post("/upload", upload.single('book'), (req, res) => {
     });
 });
 
+// Book **************************************************************
+
 // Schema For Creating Books
 const Book = mongoose.model("Book", {
     id: {
@@ -164,6 +166,83 @@ app.get('/getAllBooks', async (req, res) => {
     res.send(books);
 });
 
+// Creating Endpoint For New Collection Data
+app.get('/newcollection', async (req, res) => {
+    let books = await Book.find({});
+    let newcollection = books.slice(1).slice(-8);
+
+    console.log("New Collection Fetched");
+    res.send(newcollection);
+})
+
+// Creating Endpoint For Popular In Education Section
+app.get('/popularInEducation', async (req, res) => {
+    let books = await Book.find({ category: "Education" });
+    let popularInEducation = books.slice(0, 4);
+
+    console.log("Popular In Education Fetched");
+    res.send(popularInEducation);
+})
+
+// Creating EndPoint For Related Book Section
+app.get('/relatedBook', async (req, res) => {
+    let books = await Book.find({ category: "Education" });
+    let relatedBook = books.slice(0, 4);
+
+    console.log("Related Book Fetched");
+    res.send(relatedBook);
+})
+
+// Cart **************************************************************
+
+// Creating Middelware To Fetch User
+const fetchUser = async (req, res, next) => {
+    const token = req.header('auth-token');
+    if (!token) {
+        res.status(401).send({ errors: "Please Authenticate Using Valid Token" });
+    }
+    else {
+        try {
+            const data = jwt.verify(token, 'secret_ecom');
+            req.user = data.user;
+            next();
+        } catch (error) {
+            res.status(401).send({ errors: "Please Authenticate Using A Valid Token" });
+        }
+    }
+}
+
+// Creating Endpoint For Adding Books In Cart Data
+app.post('/addToCart', fetchUser, async (req, res) => {
+    console.log("Added", req.body.itemId);
+    let userData = await Users.findOne({ _id: req.user.id });
+
+    userData.cartData[req.body.itemId] += 1;
+    await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+    res.send("Added");
+});
+
+// Creating Endpoint To Delete Book From Cart Data
+app.post('/deleteFromCart', fetchUser, async (req, res) => {
+    console.log("Deleted", req.body.itemId);
+    let userData = await Users.findOne({ _id: req.user.id });
+
+    if (userData.cartData[req.body.itemId] > 0) {
+        userData.cartData[req.body.itemId] -= 1;
+    }
+    await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+    res.send("Deleted");
+});
+
+// Creating Endpoint To Get Cart Data
+app.post('/getCart', fetchUser, async (req, res) => {
+    console.log("Get Cart");
+    let userData = await Users.findOne({ _id: req.user.id });
+    res.json(userData.cartData);
+});
+
+// User **************************************************************
+
 // Shema Creating For User Modal
 const Users = mongoose.model('Users', {
     name: {
@@ -183,6 +262,13 @@ const Users = mongoose.model('Users', {
         type: Date,
         default: Date.now,
     }
+});
+
+// Creating API For Getting All Users
+app.get('/getAllUsers', async (req, res) => {
+    let users = await Users.find({});
+    console.log("All Users Fetched");
+    res.send(users);
 });
 
 // Creating Endpoint For Registering The User
@@ -242,78 +328,7 @@ app.post('/login', async (req, res) => {
     }
 })
 
-// Creating Endpoint For New Collection Data
-app.get('/newcollection', async (req, res) => {
-    let books = await Book.find({});
-    let newcollection = books.slice(1).slice(-8);
-
-    console.log("New Collection Fetched");
-    res.send(newcollection);
-})
-
-// Creating Endpoint For Popular In Education Section
-app.get('/popularInEducation', async (req, res) => {
-    let books = await Book.find({ category: "Education" });
-    let popularInEducation = books.slice(0, 4);
-
-    console.log("Popular In Education Fetched");
-    res.send(popularInEducation);
-})
-
-// Creating EndPoint For Related Book Section
-app.get('/relatedBook', async (req, res) => {
-    let books = await Book.find({ category: "Education" });
-    let relatedBook = books.slice(0, 4);
-
-    console.log("Related Book Fetched");
-    res.send(relatedBook);
-})
-
-// Creating Middelware To Fetch User
-const fetchUser = async (req, res, next) => {
-    const token = req.header('auth-token');
-    if (!token) {
-        res.status(401).send({ errors: "Please Authenticate Using Valid Token" });
-    }
-    else {
-        try {
-            const data = jwt.verify(token, 'secret_ecom');
-            req.user = data.user;
-            next();
-        } catch (error) {
-            res.status(401).send({ errors: "Please Authenticate Using A Valid Token" });
-        }
-    }
-}
-
-// Creating Endpoint For Adding Books In Cart Data
-app.post('/addToCart', fetchUser, async (req, res) => {
-    console.log("Added", req.body.itemId);
-    let userData = await Users.findOne({ _id: req.user.id });
-
-    userData.cartData[req.body.itemId] += 1;
-    await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
-    res.send("Added");
-});
-
-// Creating Endpoint To Delete Book From Cart Data
-app.post('/deleteFromCart', fetchUser, async (req, res) => {
-    console.log("Deleted", req.body.itemId);
-    let userData = await Users.findOne({ _id: req.user.id });
-
-    if (userData.cartData[req.body.itemId] > 0) {
-        userData.cartData[req.body.itemId] -= 1;
-    }
-    await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
-    res.send("Deleted");
-});
-
-// Creating Endpoint To Get Cart Data
-app.post('/getCart', fetchUser, async (req, res) => {
-    console.log("Get Cart");
-    let userData = await Users.findOne({ _id: req.user.id });
-    res.json(userData.cartData);
-});
+// Running **************************************************************
 
 // Running
 app.listen(port, (error) => {

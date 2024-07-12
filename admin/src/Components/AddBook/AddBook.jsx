@@ -88,7 +88,6 @@ const AddBook = () => {
             </Form.Group>
           </Col>
           <Col md="3">
-            {" "}
             <Form.Group controlId="category">
               <Form.Label>Book Category</Form.Label>
               <Form.Select

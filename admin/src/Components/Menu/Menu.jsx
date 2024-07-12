@@ -11,8 +11,12 @@ import Sidebar from "../Sidebar/Sidebar";
 
 const Menu = () => {
   return (
-    <div className="mp-4 mb-3">
-      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary bgColor">
+    <div className="mb-3">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="bg-body-tertiary bgColor pt-3 pb-3"
+      >
         <Navbar.Brand href="#home">
           <img
             src={logo}

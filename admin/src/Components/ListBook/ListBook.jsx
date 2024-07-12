@@ -36,8 +36,9 @@ const ListBook = () => {
   };
 
   return (
-    <Table bordered hover>
+    <Table bordered hover className="bgColor">
       <thead>
+        <h3>List Book</h3>
         <tr>
           <th>#</th>
           <th>Name</th>
