@@ -1,10 +1,3 @@
-.admin{
-    display: flex;
+.sidebar{
+    background-color: white;
 }
-
-.content {
-    margin-left: 250px; /* To make space for the sidebar */
-    padding: 20px;
-    width: calc(100% - 250px);
-    overflow: auto;
-  }

@@ -73,7 +73,7 @@ const AddBook = () => {
   };
 
   return (
-    <div>
+    <div className="bgColor px-3 py-3">
       <h3>Add New Book</h3>
       <Form>
         <Row className="mb-3">

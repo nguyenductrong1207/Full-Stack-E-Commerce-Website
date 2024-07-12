@@ -36,7 +36,7 @@ const ListBook = () => {
   };
 
   return (
-    <Table striped bordered hover>
+    <Table bordered hover>
       <thead>
         <tr>
           <th>#</th>
@@ -56,7 +56,7 @@ const ListBook = () => {
               <td>{i + 1}</td>
               <td>{book.name}</td>
               <td>
-                <Image src={book.image} className="img"/>
+                <Image src={book.image} className="img" />
               </td>
               <td>{book.category}</td>
               <td>{book.author}</td>
