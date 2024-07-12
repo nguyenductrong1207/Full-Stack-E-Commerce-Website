@@ -1,4 +1,3 @@
-// backend/routes/bookRoutes.js
 const express = require('express');
 const app = express.Router();
 const mongoose = require("mongoose");
@@ -67,6 +66,7 @@ const Book = mongoose.model("Book", {
     },
 });
 
+// Creating API For Adding Books
 app.post('/addBook', async (req, res) => {
     let books = await Book.find({});
     let id;
@@ -107,7 +107,7 @@ app.post('/addBook', async (req, res) => {
 // Creating API For Deleting Books
 app.post('/deleteBook', async (req, res) => {
     await Book.findOneAndDelete({ id: req.body.id });
-    console.log("Deleted");
+    console.log("Deleted Book");
     res.json({
         success: true,
         name: req.body.name,

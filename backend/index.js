@@ -25,10 +25,12 @@ mongoose.connect("mongodb+srv://ductrong12072002:Ductrong12072002.@cluster0.wt3r
 const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const publisherRoutes = require('./routes/publisherRoutes')
 
 app.use('', userRoutes);
 app.use('', bookRoutes);
 app.use('', cartRoutes);
+app.use('', publisherRoutes);
 
 // API Creation 
 app.get("/", (req, res) => {

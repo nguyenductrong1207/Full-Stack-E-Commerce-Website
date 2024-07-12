@@ -1,4 +1,3 @@
-// backend/routes/cartRoutes.js
 const express = require('express');
 const app = express.Router();
 const jwt = require('jsonwebtoken');
