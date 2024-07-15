@@ -29,18 +29,33 @@ const ListUsers = () => {
         <thead>
           <h3 className="mb-3">List User</h3>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
+            <th style={{}} className="text-center">
+              #
+            </th>
+            <th style={{ width: 400 }}>Name</th>
+            <th style={{ width: 400 }} className="text-center">
+              Email
+            </th>
+            <th style={{ width: 400 }} className="text-center">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           {allUsers.map((user, i) => {
             return (
               <tr key={i}>
-                <td>{i + 1}</td>
+                <td className="text-center">{i + 1}</td>
                 <td>{user.name}</td>
-                <td>{user.email}</td>
+                <td className="text-center">{user.email}</td>
+                <td className="text-center">
+                  <Button
+                    variant="success"
+                    onClick={() => updateUser(user.id)}
+                  >
+                    Details
+                  </Button>
+                </td>
               </tr>
             );
           })}
