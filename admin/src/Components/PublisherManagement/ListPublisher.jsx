@@ -60,11 +60,11 @@ const ListPublisher = () => {
             <th style={{}} className="text-center">
               #
             </th>
-            <th style={{ width: 300 }}>Name</th>
+            <th style={{}}>Name</th>
             <th style={{}} className="text-center">
               Country
             </th>
-            <th style={{}} className="text-center">
+            <th style={{ width: 350 }} className="text-center">
               Address
             </th>
             <th style={{}} className="text-center">
