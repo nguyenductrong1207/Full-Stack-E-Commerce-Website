@@ -149,37 +149,56 @@ app.get('/relatedBook', async (req, res) => {
 });
 
 // Creating API For Updating Book Information
-app.put('/updateBook', async (req, res) => {
-    const { id, name, description, price, salePrice, quantity, language, publicationDate, numPages, image, author, category, publisher, avilable } = req.body;
+app.put('/updateBook/:id', async (req, res) => {
+    const bookId = req.params.id;
+    const updates = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        salePrice: req.body.salePrice,
+        quantity: req.body.quantity,
+        language: req.body.language,
+        publicationDate: req.body.publicationDate,
+        numPages: req.body.numPages,
+        image: req.body.image,
+        author: req.body.author,
+        category: req.body.category,
+        publisher: req.body.publisher,
+    };
 
-    try {
-        const updatedBook = await Book.findOneAndUpdate(
-            { id: id },
-            { name, description, price, salePrice, quantity, language, publicationDate, numPages, image, author, category, publisher, avilable },
-            { new: true }
-        );
+    const updatedBook = await Book.findOneAndUpdate({ id: bookId }, updates, { new: true });
 
-        if (!updatedBook) {
-            return res.status(404).json({
-                success: false,
-                message: 'Book Not Found',
-            });
-        }
-
-        console.log("Book Updated");
-        res.json({
-            success: true,
-            book: updatedBook,
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
+    if (!updatedBook) {
+        return res.status(404).json({
             success: false,
-            message: 'An error occurred while updating the book information',
+            message: 'Book Not Found',
         });
     }
+
+    console.log("Book Updated");
+    res.json({
+        success: true,
+        book: updatedBook,
+    });
 });
 
+// Creating API For Getting Book By ID
+app.get('/getBookById/:id', async (req, res) => {
+    const bookId = req.params.id;
+    const book = await Book.findOne({ id: bookId });
+
+    if (!book) {
+        return res.status(404).json({
+            success: false,
+            message: 'Book Not Found',
+        });
+    }
+
+    console.log("Book Fetched By ID");
+    res.json({
+        success: true,
+        book: book,
+    });
+});
 
 module.exports = app;

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Style.css";
-import { useState } from "react";
-import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -10,6 +9,7 @@ import config from "../../config";
 const ListBook = () => {
   const url = config.url;
   const [allBooks, setAllBooks] = useState([]);
+  const navigate = useNavigate();
 
   const fetchInfo = async () => {
     await fetch(url + "/getAllBooks")
@@ -23,6 +23,10 @@ const ListBook = () => {
     fetchInfo();
   }, []);
 
+  const addBook = () => {
+    navigate("/addBook");
+  };
+
   const deleteBook = async (id) => {
     await fetch(url + "/deleteBook", {
       method: "POST",
@@ -35,38 +39,54 @@ const ListBook = () => {
     await fetchInfo();
   };
 
+  const updateBook = (id) => {
+    navigate(`/updateBook/${id}`);
+  };
+
   return (
     <div className="bgColor px-3 py-3">
+      <div className="mb-3 btnBlock">
+        <h3 className="">List Book</h3>
+        <Button variant="primary" onClick={() => addBook()} className="btnAdd">
+          Add New
+        </Button>
+      </div>
       <Table bordered hover>
         <thead>
-          <h3 className="mb-3">List Book</h3>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Delete</th>
+            <th style={{}} className="text-center">#</th>
+            <th style={{width: 350}}>Name</th>
+            <th style={{}} className="text-center">Image</th>
+            <th style={{}} className="text-center">Category</th>
+            <th style={{}} className="text-center">Author</th>
+            <th style={{}} className="text-center">Price</th>
+            <th style={{}} className="text-center">Quantity</th>
+            <th style={{width: 150}} className="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           {allBooks.map((book, i) => {
             return (
-              <tr key={i}>
-                <td>{i + 1}</td>
+              <tr key={book.id}>
+                <td className="text-center">{i + 1}</td>
                 <td>{book.name}</td>
-                <td>
+                <td className="text-center">
                   <Image src={book.image} className="img" />
                 </td>
-                <td>{book.category}</td>
-                <td>{book.author}</td>
-                <td>$ {book.salePrice}</td>
-                <td>{book.quantity}</td>
-                <td>
-                  <Button variant="danger" onClick={() => deleteBook(book.id)}>
+                <td className="text-center">{book.category}</td>
+                <td className="text-center">{book.author}</td>
+                <td className="text-center">$ {book.salePrice}</td>
+                <td className="text-center">{book.quantity}</td>
+                <td className="text-center">
+                  <Button
+                    variant="danger"
+                    onClick={() => deleteBook(book.id)}
+                    className="mx-2"
+                  >
                     X
+                  </Button>
+                  <Button variant="success" onClick={() => updateBook(book.id)}>
+                    Details
                   </Button>
                 </td>
               </tr>

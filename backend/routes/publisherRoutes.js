@@ -77,33 +77,24 @@ app.get('/getAllPublishers', async (req, res) => {
 app.put('/updatePublisher', async (req, res) => {
     const { id, name, country, address, email } = req.body;
 
-    try {
-        const updatedPublisher = await Publisher.findOneAndUpdate(
-            { id: id },
-            { name: name, country: country, address: address, email: email },
-            { new: true }
-        );
+    const updatedPublisher = await Publisher.findOneAndUpdate(
+        { id: id },
+        { name: name, country: country, address: address, email: email },
+        { new: true }
+    );
 
-        if (!updatedPublisher) {
-            return res.status(404).json({
-                success: false,
-                message: 'Publisher Not Found',
-            });
-        }
-
-        console.log("Publisher Updated");
-        res.json({
-            success: true,
-            publisher: updatedPublisher,
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
+    if (!updatedPublisher) {
+        return res.status(404).json({
             success: false,
-            message: 'An error occurred while updating the publisher information',
+            message: 'Publisher Not Found',
         });
     }
+
+    console.log("Publisher Updated");
+    res.json({
+        success: true,
+        publisher: updatedPublisher,
+    });
 });
 
 module.exports = app;

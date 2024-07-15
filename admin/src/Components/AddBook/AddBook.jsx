@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Style.css";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
-import { useState } from "react";
 import config from "../../config";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddBook = () => {
   const url = config.url;
   const [image, setImage] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const [bookDetail, setBookDetail] = useState({
     name: "",
     description: "",
@@ -26,6 +29,21 @@ const AddBook = () => {
     publisher: "",
   });
 
+  const fetchBookById = async (id) => {
+    await fetch(url + `/getBookById/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBookDetail(data.book);
+      });
+  };
+
+  useEffect(() => {
+    if (id) {
+      console.log("id = " + id);
+      fetchBookById(id);
+    }
+  }, [id]);
+
   const imageHandler = (e) => {
     setImage(e.target.files[0]);
   };
@@ -34,47 +52,60 @@ const AddBook = () => {
     setBookDetail({ ...bookDetail, [e.target.name]: e.target.value });
   };
 
-  const addBook = async () => {
-    console.log(bookDetail);
-    let responseData;
-    let book = bookDetail;
-
+  const handleSubmit = async () => {
     let formData = new FormData();
-    formData.append("book", image);
 
-    await fetch(url + "/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        responseData = data;
-      });
+    if (image) {
+      formData.append("book", image);
 
-    if (responseData.success) {
-      book.image = responseData.imageURL;
-      console.log(book);
-      await fetch(url + "/addBook", {
+      await fetch(url + "/upload", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(book),
+        body: formData,
       })
         .then((res) => res.json())
         .then((data) => {
-          data.success ? alert("Book Added") : alert("Failed");
+          if (data.success) {
+            bookDetail.image = data.imageURL;
+          } else {
+            alert("Failed To Upload Image");
+          }
         });
     }
+
+    // Update or Add Book Based On Whether ID Is Present
+    const apiEndpoint = id ? `/updateBook/${id}` : "/addBook";
+    const method = id ? "PUT" : "POST";
+
+    await fetch(url + apiEndpoint, {
+      method: method,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookDetail),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          id ? alert("Book Updated") : alert("Book Added");
+          id
+            ? console.log("Updated Successfully")
+            : console.log("Add Successfully");
+          console.log(bookDetail);
+
+          navigate("/listBook");
+        } else {
+          alert("Failed to add/update book");
+        }
+      });
   };
 
   return (
     <div className="bgColor px-3 py-3">
-      <h3>Add New Book</h3>
+      <h3>{id ? "Book Details" : "Add New Book"}</h3>
       <Form>
         <Row className="mb-3">
           <Col md="6">
@@ -215,7 +246,7 @@ const AddBook = () => {
               <Form.Label>Book Image</Form.Label>
               <Form.Control type="file" onChange={imageHandler} name="image" />
               <Image
-                src={image ? URL.createObjectURL(image) : "Image"}
+                src={image ? URL.createObjectURL(image) : bookDetail.image}
                 className="image"
               />
             </Form.Group>
@@ -234,14 +265,8 @@ const AddBook = () => {
           </Col>
         </Row>
 
-        <Button
-          variant="primary"
-          className="mt-3"
-          onClick={() => {
-            addBook();
-          }}
-        >
-          Add New
+        <Button variant="primary" className="mt-3" onClick={handleSubmit}>
+          {id ? "Update" : "Add New"}
         </Button>
       </Form>
     </div>
