@@ -94,7 +94,7 @@ app.put('/updatePublisher', async (req, res) => {
         console.log("Publisher Updated");
         res.json({
             success: true,
-            publisher: req.body.name,
+            publisher: updatedPublisher,
         });
 
     } catch (error) {

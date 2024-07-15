@@ -148,5 +148,38 @@ app.get('/relatedBook', async (req, res) => {
     res.send(relatedBook);
 });
 
+// Creating API For Updating Book Information
+app.put('/updateBook', async (req, res) => {
+    const { id, name, description, price, salePrice, quantity, language, publicationDate, numPages, image, author, category, publisher, avilable } = req.body;
+
+    try {
+        const updatedBook = await Book.findOneAndUpdate(
+            { id: id },
+            { name, description, price, salePrice, quantity, language, publicationDate, numPages, image, author, category, publisher, avilable },
+            { new: true }
+        );
+
+        if (!updatedBook) {
+            return res.status(404).json({
+                success: false,
+                message: 'Book Not Found',
+            });
+        }
+
+        console.log("Book Updated");
+        res.json({
+            success: true,
+            book: updatedBook,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while updating the book information',
+        });
+    }
+});
+
 
 module.exports = app;
