@@ -4,9 +4,9 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddBook from "../../Components/BookManagement/AddBook";
 import ListBook from "../../Components/BookManagement/ListBook";
-import ListUsers from "../../Components/ListUser/ListUsers";
-import ListPublisher from "../../Components/ListPublisher/ListPublisher";
-import AddPublisher from "../../Components/ListPublisher/AddPublisher";
+import ListUsers from "../../Components/UserManagement/ListUsers";
+import ListPublisher from "../../Components/PublisherManagement/ListPublisher";
+import AddPublisher from "../../Components/PublisherManagement/AddPublisher";
 
 const Admin = () => {
   return (
