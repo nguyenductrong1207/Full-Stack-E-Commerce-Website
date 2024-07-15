@@ -128,7 +128,7 @@ app.get('/newcollection', async (req, res) => {
 
     console.log("New Collection Fetched");
     res.send(newcollection);
-})
+});
 
 // Creating Endpoint For Popular In Education Section
 app.get('/popularInEducation', async (req, res) => {
@@ -137,7 +137,7 @@ app.get('/popularInEducation', async (req, res) => {
 
     console.log("Popular In Education Fetched");
     res.send(popularInEducation);
-})
+});
 
 // Creating EndPoint For Related Book Section
 app.get('/relatedBook', async (req, res) => {
@@ -146,7 +146,7 @@ app.get('/relatedBook', async (req, res) => {
 
     console.log("Related Book Fetched");
     res.send(relatedBook);
-})
+});
 
 
 module.exports = app;

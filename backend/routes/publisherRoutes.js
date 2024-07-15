@@ -28,7 +28,7 @@ const Publisher = mongoose.model("Publisher", {
 
 // Creating API For Adding Publisher
 app.post('/addPublisher', async (req, res) => {
-    let publishers = Publisher.find({});
+    let publishers = await Publisher.find({});
     let id;
 
     if (publishers.length > 0) {
@@ -71,6 +71,39 @@ app.get('/getAllPublishers', async (req, res) => {
     let publishers = await Publisher.find({});
     console.log("All Publishers Fetched");
     res.send(publishers);
+});
+
+// Creating API For Updating Publisher Information
+app.put('/updatePublisher', async (req, res) => {
+    const { id, name, country, address, email } = req.body;
+
+    try {
+        const updatedPublisher = await Publisher.findOneAndUpdate(
+            { id: id },
+            { name: name, country: country, address: address, email: email },
+            { new: true }
+        );
+
+        if (!updatedPublisher) {
+            return res.status(404).json({
+                success: false,
+                message: 'Publisher Not Found',
+            });
+        }
+
+        console.log("Publisher Updated");
+        res.json({
+            success: true,
+            publisher: req.body.name,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while updating the publisher information',
+        });
+    }
 });
 
 module.exports = app;
