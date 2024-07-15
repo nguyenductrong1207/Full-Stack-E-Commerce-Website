@@ -74,23 +74,22 @@ app.get('/getAllPublishers', async (req, res) => {
 });
 
 // Creating API For Updating Publisher Information
-app.put('/updatePublisher', async (req, res) => {
-    const { id, name, country, address, email } = req.body;
+app.put('/updatePublisher/:id', async (req, res) => {
+    const publisherId = req.params.id;
+    const updates = {
+        name: req.body.name,
+        country: req.body.country,
+        address: req.body.address,
+        email: req.body.email,
+    };
 
     const updatedPublisher = await Publisher.findOneAndUpdate(
-        { id: id },
-        { name: name, country: country, address: address, email: email },
+        { id: publisherId },
+        updates,
         { new: true }
     );
 
-    if (!updatedPublisher) {
-        return res.status(404).json({
-            success: false,
-            message: 'Publisher Not Found',
-        });
-    }
-
-    console.log("Publisher Updated");
+    console.log("Updated Publisher");
     res.json({
         success: true,
         publisher: updatedPublisher,
