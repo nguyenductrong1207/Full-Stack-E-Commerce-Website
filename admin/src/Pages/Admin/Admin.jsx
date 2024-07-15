@@ -2,8 +2,8 @@ import React from "react";
 import "./Style.css";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddBook from "../../Components/AddBook/AddBook";
-import ListBook from "../../Components/ListBook/ListBook";
+import AddBook from "../../Components/BookManagement/AddBook";
+import ListBook from "../../Components/BookManagement/ListBook";
 import ListUsers from "../../Components/ListUser/ListUsers";
 
 const Admin = () => {

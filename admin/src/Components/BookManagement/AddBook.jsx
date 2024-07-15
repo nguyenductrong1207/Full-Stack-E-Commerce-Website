@@ -247,7 +247,7 @@ const AddBook = () => {
               <Form.Control type="file" onChange={imageHandler} name="image" />
               <Image
                 src={image ? URL.createObjectURL(image) : bookDetail.image}
-                className="image"
+                className="img"
               />
             </Form.Group>
           </Col>
