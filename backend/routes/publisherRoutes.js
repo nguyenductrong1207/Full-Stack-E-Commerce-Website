@@ -96,4 +96,23 @@ app.put('/updatePublisher/:id', async (req, res) => {
     });
 });
 
+// Creating API For Getting Publisher By ID
+app.get('/getPublisherById/:id', async (req, res) => {
+    const publisherId = req.params.id;
+    const publisher = await Publisher.findOne({ id: publisherId });
+
+    if (!publisher) {
+        return res.status(404).json({
+            success: false,
+            message: 'Publisher Not Found',
+        });
+    }
+
+    console.log("Publisher Fetched By ID");
+    res.json({
+        success: true,
+        publisher: publisher,
+    });
+});
+
 module.exports = app;

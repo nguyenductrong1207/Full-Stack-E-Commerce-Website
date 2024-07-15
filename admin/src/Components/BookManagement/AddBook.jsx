@@ -98,7 +98,7 @@ const AddBook = () => {
 
           navigate("/listBook");
         } else {
-          alert("Failed to add/update book");
+          id ? alert("Book Updated Failed") : alert("Book Added Failed");
         }
       });
   };

@@ -166,16 +166,13 @@ app.put('/updateBook/:id', async (req, res) => {
         publisher: req.body.publisher,
     };
 
-    const updatedBook = await Book.findOneAndUpdate({ id: bookId }, updates, { new: true });
+    const updatedBook = await Book.findOneAndUpdate(
+        { id: bookId },
+        updates,
+        { new: true }
+    );
 
-    if (!updatedBook) {
-        return res.status(404).json({
-            success: false,
-            message: 'Book Not Found',
-        });
-    }
-
-    console.log("Book Updated");
+    console.log("Updated Book");
     res.json({
         success: true,
         book: updatedBook,

@@ -1,3 +1,17 @@
+.img {
+  width: 100px;
+}
+
 .bgColor {
-    background-color: white;
-  }
+  background-color: white;
+}
+
+.btnBlock {
+  display: flex;
+  position: relative;
+}
+
+.btnAdd {
+  position: absolute;
+  right: 20px;
+}
