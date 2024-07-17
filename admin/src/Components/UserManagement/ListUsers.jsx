@@ -3,10 +3,12 @@ import "./Style.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import config from "../../config";
+import { useNavigate } from "react-router-dom";
 
 const ListUsers = () => {
   const url = config.url;
   const [allUsers, setAllUsers] = useState([]);
+  const navigate = useNavigate();
 
   const fetchInfo = async () => {
     await fetch(url + "/getAllUsers")
@@ -20,16 +22,20 @@ const ListUsers = () => {
     fetchInfo();
   }, []);
 
+  const userDetail = (email) => {
+    navigate(`/updateUser/${email}`);
+  };
+
   return (
     <div className="bgColor px-3 py-3">
+      <h3 className="mb-3">List User</h3>
       <Table bordered hover className="">
         <thead>
-          <h3 className="mb-3">List User</h3>
           <tr>
             <th style={{}} className="text-center">
               #
             </th>
-            <th style={{ width: 400 }}>Name</th>
+            <th style={{ width: 300 }}>Name</th>
             <th style={{ width: 400 }} className="text-center">
               Email
             </th>
@@ -46,7 +52,7 @@ const ListUsers = () => {
                 <td>{user.name}</td>
                 <td className="text-center">{user.email}</td>
                 <td className="text-center">
-                  <Button variant="success" onClick={() => updateUser(user.id)}>
+                  <Button variant="success" onClick={() => userDetail(user.email)}>
                     Details
                   </Button>
                 </td>

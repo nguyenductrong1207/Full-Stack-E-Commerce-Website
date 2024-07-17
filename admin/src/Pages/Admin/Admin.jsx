@@ -7,6 +7,7 @@ import ListBook from "../../Components/BookManagement/ListBook";
 import ListUsers from "../../Components/UserManagement/ListUsers";
 import ListPublisher from "../../Components/PublisherManagement/ListPublisher";
 import AddPublisher from "../../Components/PublisherManagement/AddPublisher";
+import UserDetail from "../../Components/UserManagement/UserDetail";
 
 const Admin = () => {
   return (
@@ -16,6 +17,7 @@ const Admin = () => {
       <Route path="/updateBook/:id" element={<AddBook />} />
 
       <Route path="/listUser" element={<ListUsers />} />
+      <Route path="/updateUser/:email" element={<UserDetail />} />
 
       <Route path="/listPublisher" element={<ListPublisher />} />
       <Route path="/addPublisher" element={<AddPublisher />} />

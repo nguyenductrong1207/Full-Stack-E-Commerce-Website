@@ -8,6 +8,9 @@ const Users = mongoose.model('Users', {
     name: {
         type: String,
     },
+    status: {
+        type: String,
+    },
     email: {
         type: String,
         unique: true,
@@ -17,6 +20,21 @@ const Users = mongoose.model('Users', {
     },
     cartData: {
         type: Object,
+    },
+    image: {
+        type: String,
+    },
+    job: {
+        type: String,
+    },
+    dob: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
+    address: {
+        type: String,
     },
     date: {
         type: Date,
@@ -86,6 +104,53 @@ app.get('/getAllUsers', async (req, res) => {
     let users = await Users.find({});
     console.log("All Users Fetched");
     res.send(users);
+});
+
+// Creating API For Updating User Information
+app.put('/updateUser/:email', async (req, res) => {
+    const userEmail = req.params.email;
+    const updates = {
+        name: req.body.name,
+        status: req.body.status,
+        email: req.body.email,
+        password: req.body.password,
+        image: req.body.image,
+        job: req.body.job,
+        dob: req.body.dob,
+        phone: req.body.phone,
+        address: req.body.address,
+    };
+
+    const updatedUser = await Users.findOneAndUpdate(
+        { email: userEmail },
+        updates,
+        { new: true }
+    );
+
+    console.log("Updated User");
+    res.json({
+        success: true,
+        user: updatedUser,
+    });
+});
+
+// Creating API For Getting user By Email
+app.get('/getUserByEmail/:email', async (req, res) => {
+    const userEmail = req.params.email;
+    const user = await Users.findOne({ email: userEmail });
+
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: 'User Not Found',
+        });
+    }
+
+    console.log("User Fetched By Email");
+    res.json({
+        success: true,
+        user: user,
+    });
 });
 
 module.exports = app;
