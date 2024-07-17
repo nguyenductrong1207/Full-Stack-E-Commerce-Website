@@ -39,7 +39,10 @@ const ListUsers = () => {
             <th style={{ width: 400 }} className="text-center">
               Email
             </th>
-            <th style={{ width: 400 }} className="text-center">
+            <th style={{}} className="text-center">
+              Status
+            </th>
+            <th style={{ width: 300 }} className="text-center">
               Action
             </th>
           </tr>
@@ -51,8 +54,12 @@ const ListUsers = () => {
                 <td className="text-center">{i + 1}</td>
                 <td>{user.name}</td>
                 <td className="text-center">{user.email}</td>
+                <td className="text-center">{user.status}</td>
                 <td className="text-center">
-                  <Button variant="success" onClick={() => userDetail(user.email)}>
+                  <Button
+                    variant="success"
+                    onClick={() => userDetail(user.email)}
+                  >
                     Details
                   </Button>
                 </td>

@@ -35,7 +35,7 @@ const LoginSignUp = () => {
       localStorage.setItem("auth-token", responseData.token);
       window.location.replace("/");
     } else {
-      alert(responseData.errors);
+      alert(responseData.error);
     }
   };
 
@@ -58,7 +58,7 @@ const LoginSignUp = () => {
       localStorage.setItem("auth-token", responseData.token);
       window.location.replace("/");
     } else {
-      alert(responseData.errors);
+      alert(responseData.error);
     }
   };
 

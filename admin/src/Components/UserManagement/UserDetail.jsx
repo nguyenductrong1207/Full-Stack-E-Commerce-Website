@@ -113,12 +113,17 @@ const UserDetail = () => {
           </Col>
           <Col md="6">
             <Form.Group controlId="status">
-              <Form.Label>User Status</Form.Label>
-              <Form.Control
+              <Form.Label>Book Category</Form.Label>
+              <Form.Select
                 name="status"
+                defaultValue="Able"
                 value={userDetail.status}
                 onChange={changeHandle}
-              />
+              >
+                <option>Choose One</option>
+                <option>Able</option>
+                <option>Disable</option>
+              </Form.Select>
             </Form.Group>
           </Col>
         </Row>

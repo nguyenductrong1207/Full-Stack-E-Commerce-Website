@@ -59,6 +59,7 @@ app.post('/signup', async (req, res) => {
         name: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        status: "Able",
         cartData: cart,
     });
 
@@ -74,24 +75,29 @@ app.post('/signup', async (req, res) => {
     res.json({ success: true, token });
 })
 
-// Creaign Endpoint For User Login
+// Creating Endpoint For User Login
 app.post('/login', async (req, res) => {
     let user = await Users.findOne({ email: req.body.email });
 
     if (user) {
-        const passwordCheck = req.body.password === user.password;
+        const status = user.status;
+        if (status === "Disable") {
+            res.json({ success: false, error: "Your Account Is Disable" });
+        } else {
+            const passwordCheck = req.body.password === user.password;
 
-        if (passwordCheck) {
-            const data = {
-                user: {
-                    id: user.id
+            if (passwordCheck) {
+                const data = {
+                    user: {
+                        id: user.id
+                    }
                 }
+                const token = jwt.sign(data, 'secret_ecom');
+                res.json({ success: true, token });
             }
-            const token = jwt.sign(data, 'secret_ecom');
-            res.json({ success: true, token });
-        }
-        else {
-            res.json({ success: false, error: "Wrong Password" });
+            else {
+                res.json({ success: false, error: "Wrong Password" });
+            }
         }
     }
     else {
