@@ -1,10 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Style.css";
-import { useState } from "react";
-import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
 import config from "../../config";
 
 const ListUsers = () => {
@@ -44,15 +41,12 @@ const ListUsers = () => {
         <tbody>
           {allUsers.map((user, i) => {
             return (
-              <tr key={i}>
+              <tr key={user.id}>
                 <td className="text-center">{i + 1}</td>
                 <td>{user.name}</td>
                 <td className="text-center">{user.email}</td>
                 <td className="text-center">
-                  <Button
-                    variant="success"
-                    onClick={() => updateUser(user.id)}
-                  >
+                  <Button variant="success" onClick={() => updateUser(user.id)}>
                     Details
                   </Button>
                 </td>

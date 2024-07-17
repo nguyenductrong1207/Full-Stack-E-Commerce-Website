@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Breadcrum from "../Components/Breadcrumb/Breadcrum";
 import BookDetail from "../Components/BookDetails/BookDetail";
-import DescriptionBox from "../Components/DescriptionBox/DescriptionBox";
 import RelatedBook from "../Components/RelatedBook/RelatedBook";
+import DescriptionBox from "../Components/BookDetails/DescriptionBox";
 
 const Book = () => {
   const { allBooks } = useContext(ShopContext);

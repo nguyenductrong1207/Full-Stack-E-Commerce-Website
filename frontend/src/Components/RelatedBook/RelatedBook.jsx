@@ -3,7 +3,6 @@ import "./Style.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Item from "../Item/Item";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import config from "../../config";
@@ -24,10 +23,10 @@ const RelatedBook = () => {
   return (
     <Container>
       <h2 className="mb-4">Related Book</h2>
-      {related.map((book) => {
+      {related.slice(0, 3).map((book) => {
         return (
-          <Row>
-            <Col md="" key={book.id} className="mb-5">
+          <Row key={book.id}>
+            <Col md="" className="mb-5">
               <Row>
                 <Col md="3">
                   <a href={`/book/${book.id}`}>
@@ -36,7 +35,7 @@ const RelatedBook = () => {
                 </Col>
                 <Col md="9">
                   <Row className="mx-2">
-                    <h3>{book.name}</h3>
+                    <h4>{book.name}</h4>
                     <Col md="3">
                       <p>${book.salePrice}</p>
                     </Col>

@@ -25,23 +25,23 @@ const BookDetail = (props) => {
           <Row>
             <Col md="12">
               {" "}
-              <p>{book.name}</p>
+              <h2 className="mb-4">{book.name}</h2>
             </Col>
             <Col md=""></Col>
             <Col md=""></Col>
           </Row>
-          <Row>
+          <Row className="mb-4">
             <Col md="">
-              {" "}
+              <p>Author</p>
               <p>{book.author}</p>
             </Col>
             <Col md="">
-              {" "}
+              <p>Publication Date</p>
               <p>{book.publicationDate}</p>
             </Col>
             <Col md=""></Col>
           </Row>
-          <Row>
+          <Row className="mb-4">
             <Col md="">
               <p>{book.description}</p>{" "}
             </Col>
