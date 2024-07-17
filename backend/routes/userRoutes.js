@@ -83,7 +83,9 @@ app.post('/login', async (req, res) => {
         const status = user.status;
         if (status === "Disable") {
             res.json({ success: false, error: "Your Account Is Disable" });
-        } else {
+
+        }
+        else {
             const passwordCheck = req.body.password === user.password;
 
             if (passwordCheck) {
@@ -103,7 +105,7 @@ app.post('/login', async (req, res) => {
     else {
         res.json({ success: false, error: "Wrong Email" });
     }
-})
+});
 
 // Creating API For Getting All Users
 app.get('/getAllUsers', async (req, res) => {

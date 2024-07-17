@@ -63,7 +63,7 @@ const LoginSignUp = () => {
   };
 
   return (
-    <Container>
+    <Container className="mt-4 mb-4">
       <Form>
         <h1>{state}</h1>
 

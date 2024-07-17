@@ -1,1 +1,17 @@
+.header {
+}
 
+.menu {
+}
+
+.cart-icon {
+  font-size: 1.7rem;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.myBadge {
+  font-size: 0.7rem !important;
+  vertical-align: top !important;
+  background-color: #eaa451 !important;
+}
