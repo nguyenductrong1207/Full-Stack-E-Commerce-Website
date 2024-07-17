@@ -31,9 +31,9 @@ const Menu = () => {
             </Navbar.Brand>
           </Col>
 
-          <Col md="6" className="px-5">
+          <Col md="6" className="px-4">
             {" "}
-            <InputGroup className="">
+            <InputGroup className="my-input-group">
               <DropdownButton
                 variant="outline-secondary"
                 title="Select One"
@@ -91,20 +91,20 @@ const Menu = () => {
         <Navbar expand="lg" className="">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <NavDropdown title="Category" id="basic-nav-dropdown">
+            <Nav className="">
+              <Nav.Link href="/" className="menu-item">Home</Nav.Link>
+              <NavDropdown title="Category" id="basic-nav-dropdown" className="menu-item">
                 <NavDropdown.Item href="/education">Education</NavDropdown.Item>
                 <NavDropdown.Item href="/comic">Comic</NavDropdown.Item>
                 <NavDropdown.Item href="/technology">
                   Technology
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/">Books</Nav.Link>
-              <Nav.Link href="/">News</Nav.Link>
-              <Nav.Link href="/">About Us</Nav.Link>
-              <Nav.Link href="/">Contact Us</Nav.Link>
-              <Nav.Link href="/">FAQ's</Nav.Link>
+              <Nav.Link href="/" className="menu-item">Books</Nav.Link>
+              <Nav.Link href="/" className="menu-item">News</Nav.Link>
+              <Nav.Link href="/" className="menu-item">About Us</Nav.Link>
+              <Nav.Link href="/" className="menu-item">Contact Us</Nav.Link>
+              <Nav.Link href="/" className="menu-item">FAQ's</Nav.Link>
             </Nav>
           </Navbar.Collapse>{" "}
         </Navbar>
