@@ -11,6 +11,7 @@ import banner1 from "./Components/Assets/images/banner/banner1.png"
 import banner2 from "./Components/Assets/images/banner/banner2.png"
 import banner3 from "./Components/Assets/images/banner/banner3.png"
 import ShopContextProvider from "./Context/ShopContext";
+import ChatBot from "./Components/ChatBot/ChatBot";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<LoginSignUp />} />
           </Routes>
+          <ChatBot/>
           <Footer />
         </BrowserRouter>
       </ShopContextProvider>
